@@ -20,13 +20,18 @@ for folder pertaining to question, for file in folder:
 Returns a dictionary of questions and ids in the form of id:question
 """
 
+
 def get_questions():
     questions = {}
     with open('question.txt', 'r') as f:
-        q = f.xreadlines() #returns iterator
-        for line in q:
+        text = f.readlines() #returns iterator
+        data = iter(text)            
+        for line in data:         
             if line[:5] == "<num>":
                 q_id = line[-3:]
-                
+                next(data)
+                next(data)
+                q = next(data)
+                questions[q] = q_id
         
     return questions
